@@ -1,7 +1,12 @@
-import { Header } from "@components";
+import { Header, Search } from "@components";
 
 function App() {
-  return <Header></Header>;
+  return (
+    <>
+      <Header />
+      <Search />
+    </>
+  );
 }
 
 export default App;
