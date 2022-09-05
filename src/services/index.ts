@@ -1,1 +1,1 @@
-export { usePokeapi } from "./usePokeapi";
+export { usePokeapi } from "./usePokeapi/usePokeapi";
