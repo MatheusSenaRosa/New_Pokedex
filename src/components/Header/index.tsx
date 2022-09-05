@@ -26,6 +26,10 @@ export function Header() {
 
       <S.LogoContainer>
         <S.Logo src={Logo} />
+        <h4>
+          Made by{" -> "}
+          <span>Matheus Sena Rosa</span>
+        </h4>
       </S.LogoContainer>
 
       <S.CenterContent>

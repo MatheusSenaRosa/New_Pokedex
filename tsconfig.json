@@ -19,6 +19,8 @@
     "paths": {
       "@animations/*": ["./styles/animations/*"],
       "@components": ["./components/index"],
+      "@pages": ["./pages/index"],
+      "@services": ["./services/index"],
       "@assets": ["./assets/index"]
     }
   },

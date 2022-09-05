@@ -14,7 +14,7 @@ export const Container = styled.section`
 
 export const Wrapper = styled.div`
   width: 95%;
-  max-width: ${rem(1240)};
+  max-width: ${rem(1370)};
   display: flex;
   justify-content: space-between;
   align-items: center;

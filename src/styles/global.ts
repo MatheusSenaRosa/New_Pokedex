@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         font-family: "Montserrat", sans-serif;
         box-sizing: border-box;
+        list-style: none;
       }
     `}
 `;

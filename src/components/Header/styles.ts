@@ -28,8 +28,23 @@ export const Image = styled.img<{ isShowing: boolean }>`
 
 export const LogoContainer = styled.div`
   width: 95%;
-  max-width: ${rem(1240)};
+  max-width: ${rem(1370)};
   user-select: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h4 {
+    color: white;
+    font-size: ${rem(13)};
+    font-weight: normal;
+    font-family: "Inter", sans-serif;
+
+    span {
+      font-weight: bold;
+    }
+  }
 `;
 
 export const Logo = styled.img`
@@ -71,7 +86,7 @@ export const PokeballContainer = styled.div`
   align-items: center;
 
   position: absolute;
-  bottom: -663px;
+  bottom: -673px;
 
   user-select: none;
 
@@ -101,7 +116,7 @@ export const Stars = styled.img<{ type: "red" | "blue" }>`
 export const Pokeball = styled.img<{ type: "red" | "blue" }>`
   ${({ type }) => css`
     object-fit: cover;
-    animation: ${opacity} 300ms;
+    animation: ${opacity} 500ms;
 
     -webkit-user-drag: none;
 

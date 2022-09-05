@@ -1,0 +1,1 @@
+export { usePokeapi } from "./usePokeapi";
