@@ -1,3 +1,4 @@
+import { rem } from "polished";
 import { css, keyframes } from "styled-components";
 
 export const bounce = keyframes`
@@ -7,7 +8,7 @@ export const bounce = keyframes`
       }
 
       to {
-        transform: translateY(10px);
+        transform: translateY(${rem(10)});
       }
     `}
 `;

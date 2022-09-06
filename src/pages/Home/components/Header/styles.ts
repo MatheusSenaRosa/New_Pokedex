@@ -11,14 +11,14 @@ export const Container = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: ${rem(706)};
+  height: ${rem(707)};
 `;
 
 export const Image = styled.img<{ isShowing: boolean }>`
   ${({ isShowing }) => css`
     position: absolute;
-    top: 0;
-    height: ${rem(706)};
+    top: ${rem(-133)};
+    height: 100%;
     width: 100%;
     object-fit: cover;
     z-index: ${isShowing ? -1 : -2};
@@ -28,7 +28,7 @@ export const Image = styled.img<{ isShowing: boolean }>`
 
 export const LogoContainer = styled.div`
   width: 95%;
-  max-width: ${rem(1370)};
+  max-width: ${rem(1235)};
   user-select: none;
 
   display: flex;
@@ -48,8 +48,10 @@ export const LogoContainer = styled.div`
 `;
 
 export const Logo = styled.img`
-  height: ${rem(59)};
-  width: ${rem(159)};
+  height: ${rem(65)};
+  width: ${rem(165)};
+
+  -webkit-user-drag: none;
 `;
 
 export const CenterContent = styled.div`
@@ -63,8 +65,8 @@ export const CenterContent = styled.div`
 
 export const Title = styled.h2`
   color: white;
-  margin-top: ${rem(120)};
-  font-size: ${rem(64)};
+  margin-top: ${rem(119)};
+  font-size: ${rem(63)};
   user-select: none;
 
   animation: ${opacity} 500ms;
@@ -86,7 +88,7 @@ export const PokeballContainer = styled.div`
   align-items: center;
 
   position: absolute;
-  bottom: -673px;
+  bottom: ${rem(-680)};
 
   user-select: none;
 
@@ -103,12 +105,12 @@ export const Stars = styled.img<{ type: "red" | "blue" }>`
 
     ${type === "red" &&
     css`
-      margin-bottom: ${rem(-10)};
+      margin-bottom: ${rem(-5)};
     `}
 
     ${type === "blue" &&
     css`
-      margin-bottom: ${rem(-73)};
+      margin-bottom: ${rem(-68)};
     `}
   `}
 `;

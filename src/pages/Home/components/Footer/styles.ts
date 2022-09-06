@@ -8,7 +8,8 @@ export const Container = styled.footer`
 
 export const Wrapper = styled.div`
   width: 95%;
-  max-width: ${rem(1370)};
+  max-width: ${rem(1235)};
+
   height: 100%;
 
   margin: 0 auto;
