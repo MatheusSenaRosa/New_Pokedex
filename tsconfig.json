@@ -23,6 +23,7 @@
       "@pages": ["./pages/index"],
       "@services": ["./shared/services/index"],
       "@interfaces": ["./shared/interfaces/index"],
+      "@utils": ["./shared/utils/index"],
       "@assets": ["./assets/index"]
     }
   },

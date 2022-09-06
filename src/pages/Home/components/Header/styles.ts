@@ -12,6 +12,11 @@ export const Container = styled.header`
   flex-direction: column;
   align-items: center;
   height: ${rem(707)};
+
+  * {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
 `;
 
 export const Image = styled.img<{ isShowing: boolean }>`
@@ -29,7 +34,6 @@ export const Image = styled.img<{ isShowing: boolean }>`
 export const LogoContainer = styled.div`
   width: 95%;
   max-width: ${rem(1235)};
-  user-select: none;
 
   display: flex;
   align-items: center;
@@ -50,8 +54,6 @@ export const LogoContainer = styled.div`
 export const Logo = styled.img`
   height: ${rem(65)};
   width: ${rem(165)};
-
-  -webkit-user-drag: none;
 `;
 
 export const CenterContent = styled.div`
@@ -67,7 +69,6 @@ export const Title = styled.h2`
   color: white;
   margin-top: ${rem(119)};
   font-size: ${rem(63)};
-  user-select: none;
 
   animation: ${opacity} 500ms;
 `;
@@ -77,7 +78,6 @@ export const Description = styled.p`
   color: white;
   font-size: ${rem(18)};
   font-weight: 500;
-  user-select: none;
 
   font-family: "Inter", sans-serif;
 `;
@@ -90,8 +90,6 @@ export const PokeballContainer = styled.div`
   position: absolute;
   bottom: ${rem(-680)};
 
-  user-select: none;
-
   width: ${rem(798)};
 
   animation: ${bounce} 3s infinite alternate-reverse ease-in-out;
@@ -101,7 +99,6 @@ export const Stars = styled.img<{ type: "red" | "blue" }>`
   ${({ type }) => css`
     height: ${rem(58)};
     width: ${rem(170)};
-    -webkit-user-drag: none;
 
     ${type === "red" &&
     css`
@@ -119,8 +116,6 @@ export const Pokeball = styled.img<{ type: "red" | "blue" }>`
   ${({ type }) => css`
     object-fit: cover;
     animation: ${opacity} 500ms;
-
-    -webkit-user-drag: none;
 
     ${type === "blue" &&
     css`

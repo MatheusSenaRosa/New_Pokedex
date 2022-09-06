@@ -9,24 +9,23 @@ import {
 import { IconAll, iconTypes } from "@assets";
 import { IType, PokemonType } from "@interfaces";
 import { usePokeapi } from "@services";
+import { capitalizeFirstLetter } from "@utils";
 import { IPokemonContextType, Props } from "./interfaces";
 
 const PokemonContext = createContext<IPokemonContextType>({
   pokemonTypes: [],
+  isLoading: true,
 });
 
 export function PokemonContextProvider({ children }: Props) {
+  const { getTypes, getPokemons } = usePokeapi();
   const [pokemonTypes, setPokemonTypes] = useState<PokemonType[]>([]);
-  const { getTypes } = usePokeapi();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const capitalizeFirstLetter = (text: string) => {
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  };
-
-  const matchIconsWithPokemonTypes = (types: IType[]) => {
+  const matchIconsWithPokemonTypes = (data: IType[]) => {
     const regex = /[a-z\-]{1,}\.svg/g;
 
-    const pokemonTypesWithIcons = types.reduce((acc: PokemonType[], cur) => {
+    const pokemonTypesWithIcons = data.reduce((acc: PokemonType[], cur) => {
       if (cur.type === "unknown" || cur.type === "shadow") return acc;
 
       const icon = iconTypes.find((iconItem) => {
@@ -38,8 +37,7 @@ export function PokemonContextProvider({ children }: Props) {
         ...acc,
         {
           type: capitalizeFirstLetter(cur.type),
-          color: icon.color,
-          icon: icon.icon,
+          ...icon,
         },
       ];
     }, []);
@@ -51,10 +49,17 @@ export function PokemonContextProvider({ children }: Props) {
   };
 
   const fetchData = useCallback(async () => {
-    const { data } = await getTypes();
-    const pokemonTypesWithIcons = matchIconsWithPokemonTypes(data);
-
-    setPokemonTypes(pokemonTypesWithIcons);
+    setIsLoading(true);
+    try {
+      const { data } = await getTypes();
+      await getPokemons({ limit: 9 });
+      const types = matchIconsWithPokemonTypes(data);
+      setPokemonTypes(types);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -65,6 +70,7 @@ export function PokemonContextProvider({ children }: Props) {
     <PokemonContext.Provider
       value={{
         pokemonTypes,
+        isLoading,
       }}
     >
       {children}

@@ -61,6 +61,8 @@ export const ListItem = styled.li<{ color: string }>`
 
     :hover {
       color: ${color};
+      opacity: 1;
+
       img {
         filter: none;
       }

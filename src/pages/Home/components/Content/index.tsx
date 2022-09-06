@@ -3,13 +3,13 @@ import { usePokemon } from "@context/usePokemon";
 import * as S from "./styles";
 
 export function Content() {
-  const { pokemonTypes } = usePokemon();
+  const { isLoading, pokemonTypes } = usePokemon();
 
   return (
     <S.Container>
       <S.Wrapper>
         <S.Aside>
-          {pokemonTypes && (
+          {!isLoading && (
             <ul>
               {pokemonTypes.map((item) => (
                 <S.ListItem color={item.color}>
