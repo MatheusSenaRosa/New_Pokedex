@@ -26,25 +26,16 @@ export function PokemonContextProvider({ children }: Props) {
   const [isLoading, setIsLoading] = useState(true);
 
   const matchIconsWithPokemonTypes = (data: IType[]) => {
-    const regex = /[a-z\-]{1,}\.svg/g;
-    const pokemonTypesWithIcons = data.reduce((acc: IPokemonType[], cur) => {
-      if (cur.type === "unknown" || cur.type === "shadow") return acc;
-
-      const icon = iconTypes.find((iconItem) => {
-        const iconName = iconItem.icon.match(regex)![0].split(".")[0];
-        console.log("icon:", iconItem.icon);
-
-        return iconName === cur.type;
-      })!;
-
-      return [
-        ...acc,
-        {
-          type: cur.type,
-          ...icon,
-        },
-      ];
-    }, []);
+    const pokemonTypesWithIcons = data.map((item) => {
+      const { color, icon, type } = iconTypes.find(
+        (iconType) => iconType.type === item.type
+      )!;
+      return {
+        color,
+        icon,
+        type,
+      };
+    });
 
     return [
       { icon: IconAll, type: "All", color: "#4074c4" },
