@@ -1,14 +1,12 @@
-import { IType } from "@interfaces";
+import { IPokemon, IType } from "@interfaces";
 
 export type Result = { name: string; url: string };
 
-export type GetTypesReturn = { data: IType[] };
-
-export type GetTypes = () => Promise<GetTypesReturn>;
+export type GetTypes = () => Promise<IType[]>;
 
 export type GetPokemonsBody = { limit: number; offset?: number };
 
-export type GetPokemonsReturn = { data: { count: number; pokemons: {}[] } };
+export type GetPokemonsReturn = { count: number; pokemons: IPokemon[] };
 
 export type GetPokemons = ({
   limit,

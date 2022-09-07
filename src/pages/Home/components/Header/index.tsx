@@ -4,8 +4,8 @@ import {
   RedBackground,
   Logo,
   Stars,
-  PokeballRed,
-  PokeballBlue,
+  PokeballBackgroundBlue,
+  PokeballBackgroundRed,
 } from "@assets";
 
 import * as S from "./styles";
@@ -43,9 +43,11 @@ export function Header() {
         <S.PokeballContainer>
           <S.Stars src={Stars} type={background} />
           {background === "blue" && (
-            <S.Pokeball type="blue" src={PokeballBlue} />
+            <S.Pokeball type="blue" src={PokeballBackgroundBlue} />
           )}
-          {background === "red" && <S.Pokeball type="red" src={PokeballRed} />}
+          {background === "red" && (
+            <S.Pokeball type="red" src={PokeballBackgroundRed} />
+          )}
         </S.PokeballContainer>
       </S.CenterContent>
     </S.Container>

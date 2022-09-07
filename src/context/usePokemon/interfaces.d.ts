@@ -1,8 +1,10 @@
-import { PokemonType } from "@interfaces";
+import { IPokemon, IPokemonType } from "@interfaces";
 
 export interface IPokemonContextType {
-  pokemonTypes: PokemonType[];
+  pokemonTypes: IPokemonType[];
   isLoading: boolean;
+  count: number;
+  pokemons: IPokemon[];
 }
 
 export type Props = {

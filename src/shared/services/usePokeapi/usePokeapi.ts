@@ -9,7 +9,7 @@ export const usePokeapi = (): IUsePokeapi => {
       type: item.name,
     }));
 
-    return { data };
+    return data;
   };
 
   const getPokemons: GetPokemons = async ({ limit, offset = 0 }) => {
@@ -25,14 +25,17 @@ export const usePokeapi = (): IUsePokeapi => {
 
     for (let id = 1; id <= limit; id++) {
       const { data } = await api.get(`/pokemon/${id}`);
-      pokemons.push(data);
+      pokemons.push({
+        name: data.name,
+        image: data.sprites.other.dream_world.front_default,
+        type: data.types[0].type.name,
+        id: data.id,
+      });
     }
 
     return {
-      data: {
-        count,
-        pokemons,
-      },
+      count,
+      pokemons,
     };
   };
 
