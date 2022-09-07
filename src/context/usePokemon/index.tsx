@@ -32,7 +32,7 @@ export function PokemonContextProvider({ children }: Props) {
 
       const icon = iconTypes.find((iconItem) => {
         const iconName = iconItem.icon.match(regex)![0].split(".")[0];
-        console.log("icon:", iconName);
+        console.log("icon:", iconItem.icon.match(regex)![0].split("."));
 
         return iconName === cur.type;
       })!;
