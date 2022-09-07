@@ -29,14 +29,13 @@ export function PokemonContextProvider({ children }: Props) {
     const regex = /[a-z\-]{1,}\.svg/g;
     const pokemonTypesWithIcons = data.reduce((acc: IPokemonType[], cur) => {
       if (cur.type === "unknown" || cur.type === "shadow") return acc;
-      console.log("data:", data);
 
       const icon = iconTypes.find((iconItem) => {
         const iconName = iconItem.icon.match(regex)![0].split(".")[0];
+        console.log("icon:", iconName);
+
         return iconName === cur.type;
       })!;
-
-      console.log("icon:", icon);
 
       return [
         ...acc,
