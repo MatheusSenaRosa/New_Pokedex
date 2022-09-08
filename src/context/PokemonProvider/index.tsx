@@ -25,7 +25,7 @@ export function PokemonContextProvider({ children }: Props) {
   const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  const matchIconsWithPokemonTypes = (data: IType[]) => {
+  const matchIconsWithTypes = (data: IType[]) => {
     const pokemonTypesWithIcons = data.reduce((acc: IPokemonType[], cur) => {
       if (cur.type === "unknown" || cur.type === "shadow") return acc;
 
@@ -39,13 +39,22 @@ export function PokemonContextProvider({ children }: Props) {
     ];
   };
 
+  const loadMorePokemons = async () => {
+    const pokemonsResponse = await getPokemons({
+      limit: pokemons.length + 9,
+      offset: pokemons.length + 1,
+    });
+
+    setPokemons((prev) => [...prev, ...pokemonsResponse.pokemons]);
+  };
+
   const fetchData = useCallback(async () => {
     setIsLoading(true);
     try {
       const typesResponse = await getTypes();
       const pokemonsResponse = await getPokemons({ limit: 9 });
 
-      const types = matchIconsWithPokemonTypes(typesResponse);
+      const types = matchIconsWithTypes(typesResponse);
 
       setPokemonTypes(types);
       setCount(pokemonsResponse.count);
@@ -68,6 +77,7 @@ export function PokemonContextProvider({ children }: Props) {
         isLoading,
         count,
         pokemons,
+        loadMorePokemons,
       }}
     >
       {children}

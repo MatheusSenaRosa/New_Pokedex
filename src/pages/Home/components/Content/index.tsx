@@ -1,21 +1,12 @@
 import { Pokeball } from "@assets";
-import { usePokemon } from "@context/usePokemon";
+import { usePokemon } from "@context";
 import { capitalizeFirstLetter } from "@utils";
 
 import * as S from "./styles";
 
 export function Content() {
-  const { isLoading, pokemonTypes, count, pokemons } = usePokemon();
-
-  const findColorAndIconByPokemonType = (type: string) => {
-    const { icon, color } = pokemonTypes.find(
-      (pokemonType) => pokemonType.type === type
-    )!;
-    return {
-      icon,
-      color,
-    };
-  };
+  const { isLoading, pokemonTypes, count, pokemons, loadMorePokemons } =
+    usePokemon();
 
   return (
     <S.Container>
@@ -42,11 +33,9 @@ export function Content() {
               </S.Counter>
 
               <S.PokemonsList>
-                {pokemons.map(({ image, name, type, id }) => (
+                {pokemons.map(({ image, name, type, id, typeIcon, color }) => (
                   <S.PokemonItem>
-                    <S.ImageWrapper
-                      color={findColorAndIconByPokemonType(type).color}
-                    >
+                    <S.ImageWrapper color={color}>
                       <img src={image} alt={name} />
                     </S.ImageWrapper>
 
@@ -54,15 +43,15 @@ export function Content() {
                       <h5>#{id.toString().padStart(3, "0")}</h5>
                       <span>
                         <h3>{capitalizeFirstLetter(name)}</h3>
-                        <img
-                          src={findColorAndIconByPokemonType(type).icon}
-                          alt=""
-                        />
+                        <img src={typeIcon} alt={type} />
                       </span>
                     </S.PokemonInfo>
                   </S.PokemonItem>
                 ))}
               </S.PokemonsList>
+              <S.LoadMoreButton onClick={loadMorePokemons}>
+                Load more Pokémons
+              </S.LoadMoreButton>
             </>
           )}
         </S.MainContent>

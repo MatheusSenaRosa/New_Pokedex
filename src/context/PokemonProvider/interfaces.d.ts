@@ -5,6 +5,7 @@ export interface IPokemonContextType {
   isLoading: boolean;
   count: number;
   pokemons: IPokemon[];
+  loadMorePokemons?: () => Promise<void>;
 }
 
 export type Props = {

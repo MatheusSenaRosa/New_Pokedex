@@ -1,4 +1,4 @@
-import { PokemonContextProvider } from "@context/usePokemon";
+import { PokemonContextProvider } from "@context";
 import { Content, Footer, Header, Search } from "./components";
 
 export function Home() {

@@ -1,5 +1,6 @@
 import { rem, rgba } from "polished";
 import styled, { css } from "styled-components";
+import { reveal } from "@animations/reveal";
 
 export const Container = styled.main`
   min-height: ${rem(1370)};
@@ -80,6 +81,9 @@ export const MainContent = styled.section`
   margin-top: ${rem(23)};
 
   padding-left: ${rem(75)};
+
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Counter = styled.div`
@@ -99,11 +103,9 @@ export const PokemonsList = styled.ul`
   margin-top: ${rem(79)};
 
   display: grid;
-
-  display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
+  grid-column-gap: ${rem(30)};
+  grid-row-gap: ${rem(30)};
 `;
 
 export const PokemonItem = styled.li`
@@ -120,14 +122,16 @@ export const PokemonItem = styled.li`
 
   box-shadow: ${rem(0)} ${rem(10)} ${rem(51)} ${rem(-5)}
     rgba(183, 189, 193, 0.3);
-  transition-duration: 0.2s;
   cursor: pointer;
+
+  animation: ${reveal} 0.3s;
+  transition-duration: 0.2s;
 
   :hover {
     box-shadow: ${rem(0)} ${rem(10)} ${rem(51)} ${rem(-5)}
       rgba(183, 189, 193, 1);
 
-    transform: translateY(-4px);
+    transform: translateY(${rem(-4)}) !important;
   }
 `;
 
@@ -172,5 +176,24 @@ export const PokemonInfo = styled.div`
       color: #2f3133;
       font-size: ${rem(18)};
     }
+  }
+`;
+
+export const LoadMoreButton = styled.button`
+  margin: ${rem(100)} auto;
+  height: ${rem(45)};
+  width: ${rem(196)};
+  border-radius: ${rem(6)};
+  color: #3f5db3;
+  background-color: rgba(63, 93, 179, 0.1);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: ${rem(14)};
+  font-family: "Inter", sans-serif;
+  transition-duration: 0.3s;
+  :hover {
+    color: white;
+    background-color: #3f5db3;
   }
 `;

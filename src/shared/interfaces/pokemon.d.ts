@@ -13,4 +13,6 @@ export interface IPokemon {
   image: string;
   type: string;
   id: number;
+  typeIcon: string;
+  color: string;
 }

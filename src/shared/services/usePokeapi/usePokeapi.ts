@@ -1,3 +1,5 @@
+import { iconTypes } from "@assets";
+import { IPokemon } from "@interfaces";
 import api from "../config";
 import { GetTypes, Result, IUsePokeapi, GetPokemons } from "./interfaces";
 
@@ -12,24 +14,34 @@ export const usePokeapi = (): IUsePokeapi => {
     return data;
   };
 
-  const getPokemons: GetPokemons = async ({ limit, offset = 0 }) => {
-    const response = await api.get("/pokemon", {
-      params: {
-        limit,
-        offset,
-      },
+  const getPokemonById = async (id: number) => {
+    const { data } = await api.get(`/pokemon/${id}`);
+    return data;
+  };
+
+  const getPokemons: GetPokemons = async (params) => {
+    const {
+      data: { count, results },
+    } = await api.get("/pokemon", {
+      params,
     });
-    const { count } = response.data;
 
-    const pokemons = [];
+    const pokemons: IPokemon[] = [];
 
-    for (let id = 1; id <= limit; id++) {
-      const { data } = await api.get(`/pokemon/${id}`);
+    for (let id = params.offset || 1; id <= results.length; id++) {
+      const pokemon = await getPokemonById(id);
+
+      const { icon, color } = iconTypes.find(
+        (type) => type.type === pokemon.types[0].type.name
+      )!;
+
       pokemons.push({
-        name: data.name,
-        image: data.sprites.other.dream_world.front_default,
-        type: data.types[0].type.name,
-        id: data.id,
+        name: pokemon.name,
+        image: pokemon.sprites.other.dream_world.front_default,
+        type: pokemon.types[0].type.name,
+        id: pokemon.id,
+        typeIcon: icon,
+        color,
       });
     }
 
