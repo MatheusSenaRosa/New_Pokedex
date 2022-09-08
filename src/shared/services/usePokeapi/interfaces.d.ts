@@ -1,19 +1,45 @@
-import { IPokemon, IType } from "@interfaces";
+import { IPokemon, IResult } from "@interfaces";
 
-export type Result = { name: string; url: string };
+export type GetPokemonsParams = { limit?: number; offset?: number };
 
-export type GetTypes = () => Promise<IType[]>;
+type GetTypesReturn = { results: IResult[] };
 
-export type GetPokemonsBody = { limit: number; offset?: number };
+type GetPokemonsReturn = {
+  count: number;
+  results: IResult[];
+};
 
-export type GetPokemonsReturn = { count: number; pokemons: IPokemon[] };
+type GetPokemonByNameOrIdReturn = {
+  name: string;
+  id: number;
+  sprites: {
+    other: {
+      dream_world: {
+        front_default: string;
+      };
+    };
+  };
+  types: {
+    type: {
+      name: string;
+    };
+  }[];
+};
 
-export type GetPokemons = ({
-  limit,
-  offset,
-}: GetPokemonsBody) => Promise<GetPokemonsReturn>;
+type getPokemonsByTypeReturn = {
+  pokemon: {
+    pokemon: IResult;
+  }[];
+};
 
 export interface IUsePokeapi {
-  getTypes: GetTypes;
-  getPokemons: GetPokemons;
+  getTypes: () => Promise<GetTypesReturn>;
+
+  getPokemonsByType: (id: number) => Promise<getPokemonsByTypeReturn>;
+
+  getPokemons: (limit?: number, offset?: number) => Promise<GetPokemonsReturn>;
+
+  getPokemonByNameOrId: (
+    value: string | number
+  ) => Promise<GetPokemonByNameOrIdReturn>;
 }

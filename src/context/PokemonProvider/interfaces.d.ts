@@ -1,11 +1,13 @@
-import { IPokemon, IPokemonType } from "@interfaces";
+import { IPokemon, IType } from "@interfaces";
 
 export interface IPokemonContextType {
-  pokemonTypes: IPokemonType[];
+  types: IType[];
   isLoading: boolean;
   count: number;
   pokemons: IPokemon[];
-  loadMorePokemons?: () => Promise<void>;
+  typeFilter: number;
+  loadMorePokemons: () => Promise<void>;
+  onClickPokemonType: (id: number) => void;
 }
 
 export type Props = {

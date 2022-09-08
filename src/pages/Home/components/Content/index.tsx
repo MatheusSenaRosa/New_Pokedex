@@ -5,8 +5,15 @@ import { capitalizeFirstLetter } from "@utils";
 import * as S from "./styles";
 
 export function Content() {
-  const { isLoading, pokemonTypes, count, pokemons, loadMorePokemons } =
-    usePokemon();
+  const {
+    isLoading,
+    types,
+    count,
+    pokemons,
+    typeFilter,
+    loadMorePokemons,
+    onClickPokemonType,
+  } = usePokemon();
 
   return (
     <S.Container>
@@ -14,10 +21,15 @@ export function Content() {
         <S.Aside>
           {!isLoading && (
             <ul>
-              {pokemonTypes.map(({ color, icon, type }) => (
-                <S.ListItem color={color}>
-                  <S.Icon src={icon} alt={type} />
-                  {capitalizeFirstLetter(type)}
+              {types.map(({ color, icon, name, id }) => (
+                <S.ListItem
+                  color={color}
+                  active={typeFilter === id}
+                  disabled={typeFilter === id}
+                  onClick={() => onClickPokemonType(id)}
+                >
+                  <S.Icon src={icon} alt={name} />
+                  {capitalizeFirstLetter(name)}
                 </S.ListItem>
               ))}
             </ul>

@@ -36,12 +36,15 @@ export const Icon = styled.img<{ size?: number }>`
   `}
 `;
 
-export const ListItem = styled.li<{ color: string }>`
-  ${({ color }) => css`
+export const ListItem = styled.button<{ color: string; active: boolean }>`
+  ${({ color, active }) => css`
     display: flex;
     align-items: center;
     gap: ${rem(22)};
     height: ${rem(53)};
+
+    border: none;
+    background-color: transparent;
 
     width: min-content;
     color: gray;
@@ -59,20 +62,32 @@ export const ListItem = styled.li<{ color: string }>`
 
     img {
       transition-duration: 0.3s;
-
       filter: grayscale(100%);
       -webkit-filter: grayscale(100%);
       -moz-filter: grayscale(100%);
     }
 
-    :hover {
+    ${active &&
+    css`
       color: ${color};
       opacity: 1;
 
       img {
         filter: none;
       }
-    }
+    `}
+
+    ${!active &&
+    css`
+      :hover {
+        color: ${color};
+        opacity: 1;
+
+        img {
+          filter: none;
+        }
+      }
+    `}
   `}
 `;
 

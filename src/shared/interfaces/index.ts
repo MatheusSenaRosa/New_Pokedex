@@ -1,1 +1,1 @@
-export type { IType, IPokemonType, IPokemon } from "./pokemon";
+export type { IType, IPokemon, IResult } from "./pokemon";

@@ -1,11 +1,8 @@
 export interface IType {
-  type: string;
-}
-
-export interface IPokemonType {
-  type: string;
+  name: string;
   icon: string;
   color: string;
+  id: number;
 }
 
 export interface IPokemon {
@@ -15,4 +12,9 @@ export interface IPokemon {
   id: number;
   typeIcon: string;
   color: string;
+}
+
+export interface IResult {
+  name: string;
+  url: string;
 }
