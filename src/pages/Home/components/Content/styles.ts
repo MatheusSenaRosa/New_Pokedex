@@ -123,7 +123,6 @@ export const MainContent = styled.section`
   flex: 1;
   margin-top: ${rem(23)};
   padding-top: ${rem(54)};
-  border: 1px solid red;
   padding-left: ${rem(75)};
 
   display: flex;
@@ -131,6 +130,10 @@ export const MainContent = styled.section`
 
   @media (max-width: 1235px) {
     padding-left: ${rem(20)};
+  }
+
+  @media (max-width: 1000px) {
+    padding-left: 0;
   }
 `;
 
@@ -153,12 +156,12 @@ export const PokemonsList = styled.ul`
 
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid red;
   gap: ${rem(30)};
 `;
 
 export const PokemonItem = styled.li`
   width: 31%;
+  max-width: ${rem(286)};
   height: ${rem(304)};
   border-radius: ${rem(12)};
   padding-top: ${rem(40)};

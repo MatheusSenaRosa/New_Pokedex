@@ -28,7 +28,6 @@ export const Image = styled.img<{ isShowing: boolean }>`
     object-fit: cover;
     z-index: ${isShowing ? -1 : -2};
     animation: ${isShowing && opacity} 500ms;
-    border: 1px solid red;
   `}
 `;
 
@@ -72,6 +71,10 @@ export const Title = styled.h2`
   font-size: ${rem(63)};
 
   animation: ${opacity} 500ms;
+
+  @media (max-width: 760px) {
+    font-size: ${rem(43)};
+  }
 `;
 
 export const Description = styled.p`
@@ -81,6 +84,10 @@ export const Description = styled.p`
   font-weight: 500;
 
   font-family: "Inter", sans-serif;
+
+  @media (max-width: 760px) {
+    font-size: ${rem(13)};
+  }
 `;
 
 export const PokeballContainer = styled.div`
@@ -90,8 +97,9 @@ export const PokeballContainer = styled.div`
 
   position: absolute;
   bottom: ${rem(-680)};
+  width: ${rem(500)};
+  overflow: hidden;
 
-  width: ${rem(798)};
   animation: ${bounce} 3s infinite alternate-reverse ease-in-out;
 `;
 
