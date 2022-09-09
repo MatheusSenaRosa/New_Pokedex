@@ -28,6 +28,7 @@ export const Image = styled.img<{ isShowing: boolean }>`
     object-fit: cover;
     z-index: ${isShowing ? -1 : -2};
     animation: ${isShowing && opacity} 500ms;
+    border: 1px solid red;
   `}
 `;
 
@@ -91,7 +92,6 @@ export const PokeballContainer = styled.div`
   bottom: ${rem(-680)};
 
   width: ${rem(798)};
-
   animation: ${bounce} 3s infinite alternate-reverse ease-in-out;
 `;
 

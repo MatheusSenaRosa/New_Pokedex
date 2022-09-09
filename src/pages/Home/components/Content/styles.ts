@@ -28,6 +28,14 @@ export const Aside = styled.aside`
     display: flex;
     flex-direction: column;
   }
+
+  @media (max-width: 1000px) {
+    display: none;
+  }
+
+  @media (max-width: 1235px) {
+    width: ${rem(150)};
+  }
 `;
 
 export const Icon = styled.img<{ size?: number }>`
@@ -115,11 +123,15 @@ export const MainContent = styled.section`
   flex: 1;
   margin-top: ${rem(23)};
   padding-top: ${rem(54)};
-
+  border: 1px solid red;
   padding-left: ${rem(75)};
 
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 1235px) {
+    padding-left: ${rem(20)};
+  }
 `;
 
 export const Counter = styled.div`
@@ -139,14 +151,14 @@ export const PokemonsList = styled.ul`
   margin-top: ${rem(79)};
   margin-bottom: ${rem(100)};
 
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: ${rem(30)};
-  grid-row-gap: ${rem(30)};
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid red;
+  gap: ${rem(30)};
 `;
 
 export const PokemonItem = styled.li`
-  width: ${rem(286)};
+  width: 31%;
   height: ${rem(304)};
   border-radius: ${rem(12)};
   padding-top: ${rem(40)};
@@ -169,6 +181,10 @@ export const PokemonItem = styled.li`
       rgba(183, 189, 193, 1);
 
     transform: translateY(${rem(-4)}) !important;
+  }
+
+  @media (max-width: 1235px) {
+    width: 30%;
   }
 `;
 
