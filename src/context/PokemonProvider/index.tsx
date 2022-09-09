@@ -8,14 +8,15 @@ import {
 
 import { IconAll, iconTypes } from "@assets";
 import { IPokemon, IType, IResult } from "@interfaces";
-import { usePokeapi } from "@services";
+import { GetPokemonByNameOrIdReturn, usePokeapi } from "@services";
 import { IPokemonContextType, Props } from "./interfaces";
 
 const PokemonContext = createContext({});
 
 export function PokemonContextProvider({ children }: Props) {
   const [count, setCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingPokemons, setIsLoadingPokemons] = useState(true);
+  const [isLoadingTypes, setIsLoadingTypes] = useState(true);
   const [typeFilter, setTypeFilter] = useState(0);
   const [pokemons, setPokemons] = useState<IPokemon[]>([]);
   const [types, setTypes] = useState<IType[]>([]);
@@ -44,6 +45,23 @@ export function PokemonContextProvider({ children }: Props) {
     // setPokemons((prev) => [...prev, ...pokemonsResponse.pokemons]);
   };
 
+  const formatPokemon = (pokemon: GetPokemonByNameOrIdReturn) => {
+    const { icon, color } = iconTypes.find(
+      (type) => type.name === pokemon.types[0].type.name
+    )!;
+
+    const formattedPokemon = {
+      name: pokemon.name,
+      image: pokemon.sprites.other.dream_world.front_default,
+      type: pokemon.types[0].type.name,
+      id: pokemon.id,
+      typeIcon: icon,
+      color,
+    };
+
+    return formattedPokemon;
+  };
+
   const getPokemonsLoop = async () => {
     const pokemonsResponse = await getPokemons();
     const formattedPokemons: IPokemon[] = [];
@@ -51,18 +69,7 @@ export function PokemonContextProvider({ children }: Props) {
     for (let id = 1; id <= pokemonsResponse.results.length; id++) {
       const pokemon = await getPokemonByNameOrId(id);
 
-      const { icon, color } = iconTypes.find(
-        (type) => type.name === pokemon.types[0].type.name
-      )!;
-
-      formattedPokemons.push({
-        name: pokemon.name,
-        image: pokemon.sprites.other.dream_world.front_default,
-        type: pokemon.types[0].type.name,
-        id: pokemon.id,
-        typeIcon: icon,
-        color,
-      });
+      formattedPokemons.push(formatPokemon(pokemon));
     }
 
     return {
@@ -74,19 +81,29 @@ export function PokemonContextProvider({ children }: Props) {
   const onClickPokemonType = async (id: number) => {
     setTypeFilter(id);
 
-    const a = await getPokemonsByType(id);
+    setIsLoadingPokemons(true);
+    const pokemonsOfCurrentType = await getPokemonsByType(id);
 
-    const b = a.pokemon.map((item) => item.pokemon.url.split("/")[6]);
+    const pokemonsId = pokemonsOfCurrentType.pokemon.map(
+      (item) => item.pokemon.url.split("/")[6]
+    );
 
-    for (let pokemonId in b) {
-      const c = await getPokemonByNameOrId(b[+pokemonId]);
-      console.log(c);
+    const formattedPokemons: IPokemon[] = [];
+
+    for (let id in pokemonsId) {
+      const pokemon = await getPokemonByNameOrId(pokemonsId[+id]);
+      const formatted = formatPokemon(pokemon);
+      if (formatted.image) {
+        formattedPokemons.push(formatted);
+      }
     }
-    // console.log(d);
+
+    setCount(formattedPokemons.length);
+    setPokemons(formattedPokemons);
+    setIsLoadingPokemons(false);
   };
 
   const fetchData = useCallback(async () => {
-    setIsLoading(true);
     try {
       const typesResponse = await getTypes();
       const pokemonsResponse = await getPokemonsLoop();
@@ -98,7 +115,8 @@ export function PokemonContextProvider({ children }: Props) {
     } catch (e) {
       console.log(e);
     } finally {
-      setIsLoading(false);
+      setIsLoadingTypes(false);
+      setIsLoadingPokemons(false);
     }
   }, []);
 
@@ -110,7 +128,8 @@ export function PokemonContextProvider({ children }: Props) {
     <PokemonContext.Provider
       value={{
         types,
-        isLoading,
+        isLoadingPokemons,
+        isLoadingTypes,
         count,
         pokemons,
         typeFilter,

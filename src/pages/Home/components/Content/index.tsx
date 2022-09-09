@@ -6,11 +6,12 @@ import * as S from "./styles";
 
 export function Content() {
   const {
-    isLoading,
+    isLoadingPokemons,
     types,
     count,
     pokemons,
     typeFilter,
+    isLoadingTypes,
     loadMorePokemons,
     onClickPokemonType,
   } = usePokemon();
@@ -19,10 +20,11 @@ export function Content() {
     <S.Container>
       <S.Wrapper>
         <S.Aside>
-          {!isLoading && (
+          {!isLoadingTypes && (
             <ul>
               {types.map(({ color, icon, name, id }) => (
-                <S.ListItem
+                <S.TypeItem
+                  key={id}
                   color={color}
                   active={typeFilter === id}
                   disabled={typeFilter === id}
@@ -30,23 +32,29 @@ export function Content() {
                 >
                   <S.Icon src={icon} alt={name} />
                   {capitalizeFirstLetter(name)}
-                </S.ListItem>
+                </S.TypeItem>
               ))}
             </ul>
           )}
         </S.Aside>
 
         <S.MainContent>
-          {!isLoading && (
-            <>
-              <S.Counter>
-                <S.Icon src={Pokeball} alt="pokeball" size={20} />
-                <h4>{count} Pokémons</h4>
-              </S.Counter>
+          <S.Counter>
+            <S.Icon src={Pokeball} alt="pokeball" size={20} />
+            {!isLoadingTypes && <h4>{count} Pokémons</h4>}
+          </S.Counter>
 
+          {isLoadingPokemons && (
+            <S.LoadingWrapper>
+              <div />
+            </S.LoadingWrapper>
+          )}
+
+          {!isLoadingPokemons && (
+            <>
               <S.PokemonsList>
                 {pokemons.map(({ image, name, type, id, typeIcon, color }) => (
-                  <S.PokemonItem>
+                  <S.PokemonItem key={id}>
                     <S.ImageWrapper color={color}>
                       <img src={image} alt={name} />
                     </S.ImageWrapper>
@@ -61,9 +69,11 @@ export function Content() {
                   </S.PokemonItem>
                 ))}
               </S.PokemonsList>
-              <S.LoadMoreButton onClick={loadMorePokemons}>
-                Load more Pokémons
-              </S.LoadMoreButton>
+              {!typeFilter && (
+                <S.LoadMoreButton onClick={loadMorePokemons}>
+                  Load more Pokémons
+                </S.LoadMoreButton>
+              )}
             </>
           )}
         </S.MainContent>

@@ -9,7 +9,7 @@ type GetPokemonsReturn = {
   results: IResult[];
 };
 
-type GetPokemonByNameOrIdReturn = {
+export type GetPokemonByNameOrIdReturn = {
   name: string;
   id: number;
   sprites: {

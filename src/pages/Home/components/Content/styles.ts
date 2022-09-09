@@ -1,6 +1,7 @@
 import { rem, rgba } from "polished";
 import styled, { css } from "styled-components";
 import { reveal } from "@animations/reveal";
+import { spin } from "@animations/spin";
 
 export const Container = styled.main`
   min-height: ${rem(1370)};
@@ -13,7 +14,6 @@ export const Wrapper = styled.div`
 
   width: 95%;
   max-width: ${rem(1235)};
-  padding-top: ${rem(54)};
 
   display: flex;
 `;
@@ -22,6 +22,7 @@ export const Aside = styled.aside`
   border-right: ${rem(1)} solid #eff3f6;
   width: ${rem(237)};
   height: 100%;
+  padding-top: ${rem(54)};
 
   ul {
     display: flex;
@@ -36,7 +37,7 @@ export const Icon = styled.img<{ size?: number }>`
   `}
 `;
 
-export const ListItem = styled.button<{ color: string; active: boolean }>`
+export const TypeItem = styled.button<{ color: string; active: boolean }>`
   ${({ color, active }) => css`
     display: flex;
     align-items: center;
@@ -91,9 +92,29 @@ export const ListItem = styled.button<{ color: string; active: boolean }>`
   `}
 `;
 
+export const LoadingWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: ${rem(300)};
+  margin-right: ${rem(120)};
+
+  div {
+    height: ${rem(50)};
+    width: ${rem(50)};
+    border-radius: 50%;
+
+    border: ${rem(10)} solid gray;
+    border-top-color: transparent;
+
+    animation: ${spin} 0.7s infinite linear;
+  }
+`;
+
 export const MainContent = styled.section`
   flex: 1;
   margin-top: ${rem(23)};
+  padding-top: ${rem(54)};
 
   padding-left: ${rem(75)};
 
@@ -116,6 +137,7 @@ export const Counter = styled.div`
 
 export const PokemonsList = styled.ul`
   margin-top: ${rem(79)};
+  margin-bottom: ${rem(100)};
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -195,7 +217,7 @@ export const PokemonInfo = styled.div`
 `;
 
 export const LoadMoreButton = styled.button`
-  margin: ${rem(100)} auto;
+  margin: 0 auto ${rem(100)} auto;
   height: ${rem(45)};
   width: ${rem(196)};
   border-radius: ${rem(6)};
