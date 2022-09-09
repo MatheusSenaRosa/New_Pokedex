@@ -37,7 +37,7 @@ export interface IUsePokeapi {
 
   getPokemonsByType: (id: number) => Promise<getPokemonsByTypeReturn>;
 
-  getPokemons: (limit?: number, offset?: number) => Promise<GetPokemonsReturn>;
+  getPokemons: (offset?: number) => Promise<GetPokemonsReturn>;
 
   getPokemonByNameOrId: (
     value: string | number

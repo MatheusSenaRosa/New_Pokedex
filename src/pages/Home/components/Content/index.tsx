@@ -13,7 +13,7 @@ export function Content() {
     typeFilter,
     isLoadingTypes,
     loadMorePokemons,
-    onClickPokemonType,
+    onClickPokemonTypeHandler,
   } = usePokemon();
 
   return (
@@ -28,7 +28,7 @@ export function Content() {
                   color={color}
                   active={typeFilter === id}
                   disabled={typeFilter === id}
-                  onClick={() => onClickPokemonType(id)}
+                  onClick={() => onClickPokemonTypeHandler(id)}
                 >
                   <S.Icon src={icon} alt={name} />
                   {capitalizeFirstLetter(name)}
@@ -41,7 +41,7 @@ export function Content() {
         <S.MainContent>
           <S.Counter>
             <S.Icon src={Pokeball} alt="pokeball" size={20} />
-            {!isLoadingTypes && <h4>{count} Pokémons</h4>}
+            <h4>{count} Pokémons</h4>
           </S.Counter>
 
           {isLoadingPokemons && (
@@ -69,11 +69,11 @@ export function Content() {
                   </S.PokemonItem>
                 ))}
               </S.PokemonsList>
-              {!typeFilter && (
+              {!typeFilter && pokemons.length && pokemons.length < count ? (
                 <S.LoadMoreButton onClick={loadMorePokemons}>
                   Load more Pokémons
                 </S.LoadMoreButton>
-              )}
+              ) : null}
             </>
           )}
         </S.MainContent>

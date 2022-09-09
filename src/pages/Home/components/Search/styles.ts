@@ -27,7 +27,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const InputWrapper = styled.div`
+export const Form = styled.form`
   position: relative;
   display: flex;
   align-items: center;

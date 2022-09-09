@@ -19,10 +19,10 @@ export const usePokeapi = (): IUsePokeapi => {
     return data;
   };
 
-  const getPokemons = async (offset?: number, limit = 9) => {
+  const getPokemons = async (offset?: number) => {
     const { data } = await api.get("/pokemon", {
       params: {
-        limit,
+        limit: 9,
         offset,
       },
     });

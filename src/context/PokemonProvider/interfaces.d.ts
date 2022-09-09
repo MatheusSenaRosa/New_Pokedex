@@ -6,9 +6,12 @@ export interface IPokemonContextType {
   count: number;
   pokemons: IPokemon[];
   typeFilter: number;
+  search: string;
   isLoadingTypes: boolean;
+  setSearch: (value: string) => void;
   loadMorePokemons: () => Promise<void>;
-  onClickPokemonType: (id: number) => void;
+  onClickPokemonTypeHandler: (id: number) => void;
+  onSubmitSearchHandler: (e: FormEvent) => Promise<void>;
 }
 
 export type Props = {
