@@ -10,6 +10,11 @@ export const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 1000px) {
+    height: ${rem(400)};
+    padding-top: ${rem(120)};
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -24,6 +29,15 @@ export const Wrapper = styled.div`
     width: ${rem(210)};
     font-weight: bold;
     font-size: ${rem(32)};
+  }
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    gap: ${rem(40)};
+
+    h2 {
+      width: auto;
+    }
   }
 `;
 
@@ -83,6 +97,20 @@ export const Form = styled.form`
       border: ${rem(1)} solid #f0f4f7;
       background-color: #fafcfe;
       color: #9fbae1;
+    }
+  }
+
+  @media (max-width: 1235px) {
+    input {
+      width: ${rem(350)};
+    }
+  }
+
+  @media (max-width: 590px) {
+    width: 90%;
+
+    input {
+      width: 100%;
     }
   }
 `;

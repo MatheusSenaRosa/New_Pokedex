@@ -1,4 +1,5 @@
 import { Pokeball } from "@assets";
+import { Loader } from "@components";
 import { usePokemon } from "@context";
 import { capitalizeFirstLetter } from "@utils";
 
@@ -6,12 +7,12 @@ import * as S from "./styles";
 
 export function Content() {
   const {
-    isLoadingPokemons,
+    isLoading,
     types,
     count,
     pokemons,
     typeFilter,
-    isLoadingTypes,
+    isLoadingMore,
     loadMorePokemons,
     onClickPokemonTypeHandler,
   } = usePokemon();
@@ -20,7 +21,7 @@ export function Content() {
     <S.Container>
       <S.Wrapper>
         <S.Aside>
-          {!isLoadingTypes && (
+          {types.length ? (
             <ul>
               {types.map(({ color, icon, name, id }) => (
                 <S.TypeItem
@@ -35,7 +36,7 @@ export function Content() {
                 </S.TypeItem>
               ))}
             </ul>
-          )}
+          ) : null}
         </S.Aside>
 
         <S.MainContent>
@@ -44,13 +45,13 @@ export function Content() {
             <h4>{count} Pokémons</h4>
           </S.Counter>
 
-          {isLoadingPokemons && (
+          {isLoading && (
             <S.LoadingWrapper>
-              <div />
+              <Loader />
             </S.LoadingWrapper>
           )}
 
-          {!isLoadingPokemons && (
+          {!isLoading && (
             <>
               <S.PokemonsList>
                 {pokemons.map(({ image, name, type, id, typeIcon, color }) => (
@@ -70,8 +71,15 @@ export function Content() {
                 ))}
               </S.PokemonsList>
               {!typeFilter && pokemons.length && pokemons.length < count ? (
-                <S.LoadMoreButton onClick={loadMorePokemons}>
-                  Load more Pokémons
+                <S.LoadMoreButton
+                  onClick={loadMorePokemons}
+                  disabled={isLoadingMore}
+                >
+                  {isLoadingMore ? (
+                    <Loader size={20} color={"#3f5db3"} />
+                  ) : (
+                    "Load more Pokémons"
+                  )}
                 </S.LoadMoreButton>
               ) : null}
             </>

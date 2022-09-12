@@ -17,8 +17,8 @@ const PokemonContext = createContext({});
 
 export function PokemonContextProvider({ children }: Props) {
   const [count, setCount] = useState(0);
-  const [isLoadingPokemons, setIsLoadingPokemons] = useState(true);
-  const [isLoadingTypes, setIsLoadingTypes] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [typeFilter, setTypeFilter] = useState<number | null>(0);
   const [pokemons, setPokemons] = useState<IPokemon[]>([]);
   const [types, setTypes] = useState<IType[]>([]);
@@ -57,9 +57,16 @@ export function PokemonContextProvider({ children }: Props) {
   };
 
   const loadMorePokemons = async () => {
-    const pokemonsResponse = await getPokemonsLoop(pokemons.length);
+    try {
+      setIsLoadingMore(true);
+      const pokemonsResponse = await getPokemonsLoop(pokemons.length);
 
-    setPokemons((prev) => [...prev, ...pokemonsResponse.pokemons]);
+      setPokemons((prev) => [...prev, ...pokemonsResponse.pokemons]);
+    } catch {
+      toast.error("Sorry, some error has occurred.");
+    } finally {
+      setIsLoadingMore(false);
+    }
   };
 
   const formatPokemon = (pokemon: GetPokemonByNameOrIdReturn) => {
@@ -92,14 +99,13 @@ export function PokemonContextProvider({ children }: Props) {
     } catch {
       toast.error("Sorry, some error has occurred.");
     } finally {
-      setIsLoadingTypes(false);
-      setIsLoadingPokemons(false);
+      setIsLoading(false);
     }
   }, []);
 
   const onClickPokemonTypeHandler = async (id: number) => {
     setTypeFilter(id);
-    setIsLoadingPokemons(true);
+    setIsLoading(true);
     setSearch("");
 
     try {
@@ -131,13 +137,13 @@ export function PokemonContextProvider({ children }: Props) {
     } catch {
       toast.error("Sorry, some error has occurred.");
     } finally {
-      setIsLoadingPokemons(false);
+      setIsLoading(false);
     }
   };
 
   const onSubmitSearchHandler = async (e: FormEvent) => {
     e.preventDefault();
-    setIsLoadingPokemons(true);
+    setIsLoading(true);
     try {
       const pokemon = await getPokemonByNameOrId(search);
       const formattedPokemon = formatPokemon(pokemon);
@@ -147,7 +153,7 @@ export function PokemonContextProvider({ children }: Props) {
     } catch {
       toast.error("Sorry, some error has occurred.");
     } finally {
-      setIsLoadingPokemons(false);
+      setIsLoading(false);
     }
   };
 
@@ -159,12 +165,12 @@ export function PokemonContextProvider({ children }: Props) {
     <PokemonContext.Provider
       value={{
         types,
-        isLoadingPokemons,
-        isLoadingTypes,
+        isLoading,
         count,
         pokemons,
         search,
         typeFilter,
+        isLoadingMore,
         setSearch,
         loadMorePokemons,
         onClickPokemonTypeHandler,

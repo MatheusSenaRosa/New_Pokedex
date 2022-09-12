@@ -2,12 +2,12 @@ import { IPokemon, IType } from "@interfaces";
 
 export interface IPokemonContextType {
   types: IType[];
-  isLoadingPokemons: boolean;
   count: number;
   pokemons: IPokemon[];
   typeFilter: number;
   search: string;
-  isLoadingTypes: boolean;
+  isLoading: boolean;
+  isLoadingMore: boolean;
   setSearch: (value: string) => void;
   loadMorePokemons: () => Promise<void>;
   onClickPokemonTypeHandler: (id: number) => void;

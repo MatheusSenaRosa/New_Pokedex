@@ -106,17 +106,6 @@ export const LoadingWrapper = styled.div`
   width: 100%;
   margin-top: ${rem(300)};
   margin-right: ${rem(120)};
-
-  div {
-    height: ${rem(50)};
-    width: ${rem(50)};
-    border-radius: 50%;
-
-    border: ${rem(10)} solid gray;
-    border-top-color: transparent;
-
-    animation: ${spin} 0.7s infinite linear;
-  }
 `;
 
 export const MainContent = styled.section`
@@ -153,14 +142,14 @@ export const Counter = styled.div`
 export const PokemonsList = styled.ul`
   margin-top: ${rem(79)};
   margin-bottom: ${rem(100)};
-
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: ${rem(30)};
 `;
 
 export const PokemonItem = styled.li`
-  width: 31%;
+  flex: 1;
   max-width: ${rem(286)};
   height: ${rem(304)};
   border-radius: ${rem(12)};
@@ -186,8 +175,12 @@ export const PokemonItem = styled.li`
     transform: translateY(${rem(-4)}) !important;
   }
 
+  :last-child {
+    margin-right: auto;
+  }
+
   @media (max-width: 1235px) {
-    width: 30%;
+    flex: 1;
   }
 `;
 
@@ -243,13 +236,21 @@ export const LoadMoreButton = styled.button`
   color: #3f5db3;
   background-color: rgba(63, 93, 179, 0.1);
   border: none;
-  cursor: pointer;
   font-weight: 600;
   font-size: ${rem(14)};
   font-family: "Inter", sans-serif;
   transition-duration: 0.3s;
-  :hover {
-    color: white;
-    background-color: #3f5db3;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  :not(:disabled) {
+    cursor: pointer;
+
+    :hover {
+      color: white;
+      background-color: #3f5db3;
+    }
   }
 `;
