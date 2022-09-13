@@ -108,6 +108,8 @@ export function PokemonContextProvider({ children }: Props) {
     setIsLoading(true);
     setSearch("");
 
+    document.getElementById("content")?.scrollIntoView();
+
     try {
       if (!id) {
         const pokemonsResponse = await getPokemonsLoop();
@@ -150,7 +152,11 @@ export function PokemonContextProvider({ children }: Props) {
       setPokemons([formattedPokemon]);
       setCount(1);
       setTypeFilter(null);
-    } catch {
+    } catch (e: any) {
+      if (e.response.status === 404) {
+        toast.warn("There is no Pokémon with this name or code.");
+        return;
+      }
       toast.error("Sorry, some error has occurred.");
     } finally {
       setIsLoading(false);

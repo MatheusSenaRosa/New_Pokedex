@@ -86,7 +86,6 @@ export const ListWrapper = styled.div`
   left: -1px;
   width: 100.5%;
   padding-bottom: ${rem(2)};
-
   z-index: 2;
 `;
 

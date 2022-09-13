@@ -19,7 +19,7 @@ export function Content() {
 
   return (
     <S.Container>
-      <S.Wrapper>
+      <S.Wrapper id="content">
         <S.Aside>
           {types.length ? (
             <ul>
@@ -45,7 +45,7 @@ export function Content() {
             <h4>{count} Pokémons</h4>
           </S.Counter>
 
-          {types.length && (
+          {types.length ? (
             <S.SelectContainer>
               <Select
                 data={types.map((item) => ({
@@ -59,7 +59,7 @@ export function Content() {
                 isLoading={isLoading}
               />
             </S.SelectContainer>
-          )}
+          ) : null}
 
           {isLoading && (
             <S.LoadingWrapper>

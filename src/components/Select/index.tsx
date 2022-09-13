@@ -1,6 +1,6 @@
 import { ArrowSelect } from "@assets";
 import { capitalizeFirstLetter } from "@utils";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import * as S from "./styles";
 
@@ -20,6 +20,11 @@ export function Select({ data, value, isLoading, onSelect }: Props) {
     onSelect(newValue);
   };
 
+  const currentValue = useMemo(
+    () => data.find((item) => item.id === value),
+    [data, value]
+  );
+
   return (
     <>
       {isActive && <S.Overlay onClick={() => setIsActive(false)} />}
@@ -31,9 +36,7 @@ export function Select({ data, value, isLoading, onSelect }: Props) {
         >
           Show:{" "}
           <span>
-            {capitalizeFirstLetter(
-              data.find((item) => item.id === value)!.name
-            )}
+            {currentValue ? capitalizeFirstLetter(currentValue!.name) : "-"}
           </span>
           <img src={ArrowSelect} alt="expand" />
         </S.Selected>
