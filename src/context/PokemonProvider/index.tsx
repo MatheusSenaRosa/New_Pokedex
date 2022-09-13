@@ -147,7 +147,7 @@ export function PokemonContextProvider({ children }: Props) {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const pokemon = await getPokemonByNameOrId(search);
+      const pokemon = await getPokemonByNameOrId(search.toLowerCase());
       const formattedPokemon = formatPokemon(pokemon);
       setPokemons([formattedPokemon]);
       setCount(1);

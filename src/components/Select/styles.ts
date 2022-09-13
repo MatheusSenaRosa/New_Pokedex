@@ -12,10 +12,10 @@ export const Overlay = styled.div`
 
 export const Container = styled.div<{ isActive: boolean }>`
   ${({ isActive }) => css`
-    border: 1px solid #a0afba;
-    width: 488px;
-    height: 56px;
-    border-radius: 10px;
+    border: ${rem(1)} solid #a0afba;
+    width: ${rem(488)};
+    height: ${rem(56)};
+    border-radius: ${rem(10)};
 
     margin: 0 auto;
 
@@ -33,7 +33,7 @@ export const Container = styled.div<{ isActive: boolean }>`
 
     ${isActive &&
     css`
-      border-radius: 10px 10px 0 0;
+      border-radius: ${rem(10)} ${rem(10)} 0 0;
     `}
   `}
 `;
@@ -44,12 +44,12 @@ export const Selected = styled.div<{ isActive: boolean; isLoading: boolean }>`
     display: flex;
     flex: 1;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 ${rem(20)};
     gap: ${rem(4)};
     font-weight: 500;
     color: ${rgba("#7a7d80", 0.6)};
     transition-duration: 0.3s;
-    border-radius: 10px;
+    border-radius: ${rem(10)};
 
     cursor: pointer;
 
@@ -71,7 +71,7 @@ export const Selected = styled.div<{ isActive: boolean; isLoading: boolean }>`
 
     ${isActive &&
     css`
-      border-radius: 10px 10px 0 0;
+      border-radius: ${rem(10)} ${rem(10)} 0 0;
     `}
   `}
 `;
@@ -79,11 +79,11 @@ export const Selected = styled.div<{ isActive: boolean; isLoading: boolean }>`
 export const ListWrapper = styled.div`
   position: absolute;
 
-  border: 1px solid #a0afba;
-  border-radius: 0 0 5px 5px;
+  border: ${rem(1)} solid #a0afba;
+  border-radius: 0 0 ${rem(5)} ${rem(5)};
   background-color: white;
-  top: 54px;
-  left: -1px;
+  top: ${rem(54)};
+  left: ${rem(-1)};
   width: 100.5%;
   padding-bottom: ${rem(2)};
   z-index: 2;
@@ -92,11 +92,11 @@ export const ListWrapper = styled.div`
 export const List = styled.ul`
   overflow-y: scroll;
   max-height: ${rem(200)};
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 ${rem(5)} ${rem(5)};
 
   ::-webkit-scrollbar {
-    width: 5px;
-    border-radius: 5px;
+    width: ${rem(5)};
+    border-radius: ${rem(5)};
   }
 
   ::-webkit-scrollbar-track {
@@ -105,7 +105,7 @@ export const List = styled.ul`
 
   ::-webkit-scrollbar-thumb {
     background: #4074c4;
-    border-radius: 5px;
+    border-radius: ${rem(5)};
   }
 `;
 
@@ -118,7 +118,7 @@ export const Option = styled.li<{ color?: string }>`
       background-color: transparent;
       border: none;
       width: 100%;
-      height: 50px;
+      height: ${rem(50)};
 
       font-weight: 600;
       color: ${color};
@@ -128,7 +128,7 @@ export const Option = styled.li<{ color?: string }>`
       align-items: center;
       gap: ${rem(20)};
 
-      padding-left: 20px;
+      padding-left: ${rem(20)};
       cursor: pointer;
 
       img {
@@ -142,10 +142,10 @@ export const Option = styled.li<{ color?: string }>`
     }
 
     :last-child {
-      border-radius: 0 0 5px 5px;
+      border-radius: 0 0 ${rem(5)} ${rem(5)};
 
       button {
-        border-radius: 0 0 5px 5px;
+        border-radius: 0 0 ${rem(5)} ${rem(5)};
       }
     }
   `}

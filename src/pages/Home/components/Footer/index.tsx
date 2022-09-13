@@ -11,6 +11,8 @@ export function Footer() {
             <li>TypeScript</li>
             <li>Styled Components</li>
             <li>Axios</li>
+            <li>Polished</li>
+            <li>Toastify</li>
           </ul>
         </S.Technologies>
       </S.Wrapper>
