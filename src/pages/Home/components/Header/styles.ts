@@ -49,6 +49,11 @@ export const LogoContainer = styled.div`
       font-weight: bold;
     }
   }
+
+  @media (max-width: 420px) {
+    flex-direction: column;
+    gap: ${rem(5)};
+  }
 `;
 
 export const Logo = styled.img`
@@ -75,6 +80,14 @@ export const Title = styled.h2`
   @media (max-width: 760px) {
     font-size: ${rem(43)};
   }
+
+  @media (max-width: 540px) {
+    font-size: ${rem(30)};
+  }
+
+  @media (max-width: 390px) {
+    font-size: ${rem(25)};
+  }
 `;
 
 export const Description = styled.p`
@@ -82,11 +95,16 @@ export const Description = styled.p`
   color: white;
   font-size: ${rem(18)};
   font-weight: 500;
+  text-align: center;
 
   font-family: "Inter", sans-serif;
 
   @media (max-width: 760px) {
     font-size: ${rem(13)};
+  }
+
+  @media (max-width: 390px) {
+    font-size: ${rem(12)};
   }
 `;
 
@@ -101,6 +119,14 @@ export const PokeballContainer = styled.div`
   overflow: hidden;
 
   animation: ${bounce} 3s infinite alternate-reverse ease-in-out;
+
+  @media (max-width: 520px) {
+    width: ${rem(480)};
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 export const Stars = styled.img<{ type: "red" | "blue" }>`
@@ -122,7 +148,7 @@ export const Stars = styled.img<{ type: "red" | "blue" }>`
 
 export const Pokeball = styled.img<{ type: "red" | "blue" }>`
   ${({ type }) => css`
-    object-fit: cover;
+    object-fit: contain;
     animation: ${opacity} 500ms;
 
     ${type === "blue" &&

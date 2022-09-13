@@ -25,6 +25,7 @@ import Rock from "./svg/IconTypes/rock.svg";
 import Steel from "./svg/IconTypes/steel.svg";
 import Water from "./svg/IconTypes/water.svg";
 import Pokeball from "./svg/pokeball.svg";
+import ArrowSelect from "./svg/arrow-select.svg";
 
 const iconTypes = [
   { icon: Bug, color: "#a0bc4c", name: "bug" },
@@ -57,4 +58,5 @@ export {
   Pokeball,
   iconTypes,
   IconAll,
+  ArrowSelect,
 };

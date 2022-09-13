@@ -39,6 +39,13 @@ export const Wrapper = styled.div`
       width: auto;
     }
   }
+
+  @media (max-width: 400px) {
+    width: 100%;
+    h2 {
+      font-size: ${rem(26)};
+    }
+  }
 `;
 
 export const Form = styled.form`
@@ -106,11 +113,15 @@ export const Form = styled.form`
     }
   }
 
-  @media (max-width: 590px) {
-    width: 90%;
+  @media (max-width: 620px) {
+    width: 98%;
 
     input {
       width: 100%;
     }
+  }
+
+  @media (max-width: 320px) {
+    width: 99%;
   }
 `;

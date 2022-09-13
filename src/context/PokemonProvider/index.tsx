@@ -35,7 +35,7 @@ export function PokemonContextProvider({ children }: Props) {
     }, []);
 
     return [
-      { icon: IconAll, name: "All", color: "#4074c4", id: 0 },
+      { icon: IconAll, name: "all", color: "#4074c4", id: 0 },
       ...pokemonTypesWithIcons,
     ];
   };

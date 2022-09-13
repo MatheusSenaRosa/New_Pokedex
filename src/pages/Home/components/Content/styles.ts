@@ -1,7 +1,6 @@
 import { rem, rgba } from "polished";
 import styled, { css } from "styled-components";
 import { reveal } from "@animations/reveal";
-import { spin } from "@animations/spin";
 
 export const Container = styled.main`
   min-height: ${rem(1370)};
@@ -110,8 +109,7 @@ export const LoadingWrapper = styled.div`
 
 export const MainContent = styled.section`
   flex: 1;
-  margin-top: ${rem(23)};
-  padding-top: ${rem(54)};
+  margin-top: ${rem(77)};
   padding-left: ${rem(75)};
 
   display: flex;
@@ -123,6 +121,7 @@ export const MainContent = styled.section`
 
   @media (max-width: 1000px) {
     padding-left: 0;
+    margin-top: ${rem(50)};
   }
 `;
 
@@ -137,20 +136,43 @@ export const Counter = styled.div`
     font-size: ${rem(18)};
     font-weight: bold;
   }
+
+  @media (max-width: 1000px) {
+    justify-content: center;
+  }
+`;
+
+export const SelectContainer = styled.div`
+  display: none;
+
+  @media (max-width: 1000px) {
+    display: block;
+    margin-top: ${rem(30)};
+  }
+
+  @media (max-width: 550px) {
+    > div {
+      width: 95%;
+    }
+  }
 `;
 
 export const PokemonsList = styled.ul`
   margin-top: ${rem(79)};
   margin-bottom: ${rem(100)};
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   gap: ${rem(30)};
+
+  @media (max-width: 1000px) {
+    margin-top: ${rem(50)};
+  }
 `;
 
 export const PokemonItem = styled.li`
   flex: 1;
   max-width: ${rem(286)};
+  min-width: ${rem(240)};
   height: ${rem(304)};
   border-radius: ${rem(12)};
   padding-top: ${rem(40)};
@@ -181,6 +203,10 @@ export const PokemonItem = styled.li`
 
   @media (max-width: 1235px) {
     flex: 1;
+  }
+
+  @media (max-width: 550px) {
+    max-width: 100%;
   }
 `;
 

@@ -1,5 +1,5 @@
 import { Pokeball } from "@assets";
-import { Loader } from "@components";
+import { Loader, Select } from "@components";
 import { usePokemon } from "@context";
 import { capitalizeFirstLetter } from "@utils";
 
@@ -44,6 +44,22 @@ export function Content() {
             <S.Icon src={Pokeball} alt="pokeball" size={20} />
             <h4>{count} Pokémons</h4>
           </S.Counter>
+
+          {types.length && (
+            <S.SelectContainer>
+              <Select
+                data={types.map((item) => ({
+                  name: item.name,
+                  color: item.color,
+                  icon: item.icon,
+                  id: item.id,
+                }))}
+                value={typeFilter}
+                onSelect={onClickPokemonTypeHandler}
+                isLoading={isLoading}
+              />
+            </S.SelectContainer>
+          )}
 
           {isLoading && (
             <S.LoadingWrapper>
