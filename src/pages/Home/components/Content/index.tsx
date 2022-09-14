@@ -42,7 +42,9 @@ export function Content() {
         <S.MainContent>
           <S.Counter>
             <S.Icon src={Pokeball} alt="pokeball" size={20} />
-            <h4>{count} Pokémons</h4>
+            <h4>
+              {count} Pokémon{count > 1 && "s"}
+            </h4>
           </S.Counter>
 
           {types.length ? (
