@@ -16,13 +16,13 @@ import { IPokemonContextType, Props } from "./interfaces";
 const PokemonContext = createContext({});
 
 export function PokemonContextProvider({ children }: Props) {
-  const [count, setCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [typeFilter, setTypeFilter] = useState<number | null>(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [pokemons, setPokemons] = useState<IPokemon[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [types, setTypes] = useState<IType[]>([]);
   const [search, setSearch] = useState("");
+  const [count, setCount] = useState(0);
 
   const { getTypes, getPokemons, getPokemonByNameOrId, getPokemonsByType } =
     usePokeapi();
