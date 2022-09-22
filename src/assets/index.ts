@@ -1,10 +1,8 @@
-import PokeballBackgroundRed from "./png/pokeball-background-red.png";
 import PokeballBackgroundBlue from "./png/pokeball-background-blue.png";
-
+import PokeballBackgroundRed from "./png/pokeball-background-red.png";
+import ArrowSelect from "./svg/arrow-select.svg";
 import BlueBackground from "./svg/background-blue.svg";
 import RedBackground from "./svg/background-red.svg";
-import Logo from "./svg/logo.svg";
-import Stars from "./svg/stars.svg";
 import Bug from "./svg/IconTypes/bug.svg";
 import Dark from "./svg/IconTypes/dark.svg";
 import Dragon from "./svg/IconTypes/dragon.svg";
@@ -24,8 +22,9 @@ import Psychic from "./svg/IconTypes/psychic.svg";
 import Rock from "./svg/IconTypes/rock.svg";
 import Steel from "./svg/IconTypes/steel.svg";
 import Water from "./svg/IconTypes/water.svg";
+import Logo from "./svg/logo.svg";
 import Pokeball from "./svg/pokeball.svg";
-import ArrowSelect from "./svg/arrow-select.svg";
+import Stars from "./svg/stars.svg";
 
 const iconTypes = [
   { icon: Bug, color: "#a0bc4c", name: "bug" },

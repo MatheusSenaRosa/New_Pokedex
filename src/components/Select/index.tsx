@@ -1,12 +1,13 @@
+import { useState, useMemo } from "react";
+
 import { ArrowSelect } from "@assets";
 import { capitalizeFirstLetter } from "@utils";
-import { useState, useMemo } from "react";
 
 import * as S from "./styles";
 
 type Props = {
   data: { name: string; icon?: string; color?: string; id: number }[];
-  value: number;
+  value: number | null;
   isLoading: boolean;
   onSelect: (value: number) => void;
 };
@@ -36,7 +37,7 @@ export function Select({ data, value, isLoading, onSelect }: Props) {
         >
           Show:{" "}
           <span>
-            {currentValue ? capitalizeFirstLetter(currentValue!.name) : "-"}
+            {currentValue ? capitalizeFirstLetter(currentValue.name) : "-"}
           </span>
           <img src={ArrowSelect} alt="expand" />
         </S.Selected>

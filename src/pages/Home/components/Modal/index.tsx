@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+
 import { Portal } from "@components";
+import { hideScroll, showScroll } from "@utils";
 
 import * as S from "./styles";
-import { hideScroll, showScroll } from "@utils";
 
 type Props = {
   onClose: () => void;

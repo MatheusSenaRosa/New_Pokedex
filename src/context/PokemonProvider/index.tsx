@@ -9,11 +9,12 @@ import {
 import { toast } from "react-toastify";
 
 import { IconAll, iconTypes } from "@assets";
-import { IPokemon, IType, IResult } from "@interfaces";
+import { IPokemon, IType, IResult, IError } from "@interfaces";
 import { GetPokemonByNameOrIdReturn, usePokeapi } from "@services";
+
 import { IPokemonContextType, Props } from "./interfaces";
 
-const PokemonContext = createContext({});
+const PokemonContext = createContext<IPokemonContextType | null>(null);
 
 export function PokemonContextProvider({ children }: Props) {
   const [typeFilter, setTypeFilter] = useState<number | null>(0);
@@ -44,7 +45,7 @@ export function PokemonContextProvider({ children }: Props) {
     const pokemonsResponse = await getPokemons(offset);
     const formattedPokemons: IPokemon[] = [];
 
-    for (let index in pokemonsResponse.results) {
+    for (const index in pokemonsResponse.results) {
       const id = pokemonsResponse.results[index].url.split("/")[6];
       const pokemon = await getPokemonByNameOrId(id);
       formattedPokemons.push(formatPokemon(pokemon));
@@ -126,7 +127,7 @@ export function PokemonContextProvider({ children }: Props) {
 
       const formattedPokemons: IPokemon[] = [];
 
-      for (let id in pokemonsId) {
+      for (const id in pokemonsId) {
         const pokemon = await getPokemonByNameOrId(pokemonsId[+id]);
         const formatted = formatPokemon(pokemon);
         if (formatted.image) {
@@ -152,8 +153,9 @@ export function PokemonContextProvider({ children }: Props) {
       setPokemons([formattedPokemon]);
       setCount(1);
       setTypeFilter(null);
-    } catch (e: any) {
-      if (e.response.status === 404) {
+    } catch (e) {
+      const error = e as IError;
+      if (error.response.status === 404) {
         toast.warn("There is no Pokémon with this name or code.");
         return;
       }
@@ -195,5 +197,5 @@ export const usePokemon = () => {
     throw new Error("usePokemon must be used within a PokemonProvider");
   }
 
-  return context as IPokemonContextType;
+  return context;
 };

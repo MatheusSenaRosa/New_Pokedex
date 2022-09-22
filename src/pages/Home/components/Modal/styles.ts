@@ -1,11 +1,12 @@
+import { rem, rgba } from "polished";
+import styled, { css } from "styled-components";
+
 import {
   hideOverlay,
   showOverlay,
   hideModal,
   showModal,
 } from "@animations/modal";
-import { rem, rgba } from "polished";
-import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   position: fixed;

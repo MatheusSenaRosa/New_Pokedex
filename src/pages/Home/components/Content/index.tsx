@@ -1,10 +1,11 @@
+import { useState } from "react";
+
 import { Pokeball } from "@assets";
 import { Loader, Select } from "@components";
 import { usePokemon } from "@context";
 import { capitalizeFirstLetter } from "@utils";
-import { useState } from "react";
-import { Modal } from "../Modal";
 
+import { Modal } from "../Modal";
 import * as S from "./styles";
 
 export function Content() {

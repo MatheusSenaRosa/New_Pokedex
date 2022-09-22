@@ -1,6 +1,7 @@
-import styled, { css } from "styled-components";
-import { opacity } from "@animations/background";
 import { rem } from "polished";
+import styled, { css } from "styled-components";
+
+import { opacity } from "@animations/background";
 import { bounce } from "@animations/bounce";
 import { reveal } from "@animations/reveal";
 

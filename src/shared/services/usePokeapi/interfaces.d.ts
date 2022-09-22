@@ -1,4 +1,4 @@
-import { IPokemon, IResult } from "@interfaces";
+import { IResult } from "@interfaces";
 
 export type GetPokemonsParams = { limit?: number; offset?: number };
 

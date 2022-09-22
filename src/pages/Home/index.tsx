@@ -1,4 +1,5 @@
 import { PokemonContextProvider } from "@context";
+
 import { Content, Footer, Header, Search } from "./components";
 
 function HomeComponent() {

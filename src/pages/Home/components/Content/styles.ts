@@ -1,5 +1,6 @@
 import { rem, rgba } from "polished";
 import styled, { css } from "styled-components";
+
 import { reveal } from "@animations/reveal";
 
 export const Container = styled.main`

@@ -3,7 +3,7 @@ import { IUsePokeapi } from "./interfaces";
 
 export const usePokeapi = (): IUsePokeapi => {
   const getTypes = async () => {
-    const { data } = await api.get(`/type`);
+    const { data } = await api.get("/type");
 
     return data;
   };

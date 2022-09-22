@@ -1,6 +1,7 @@
-import { spin } from "@animations/spin";
 import { rem } from "polished";
 import styled, { css } from "styled-components";
+
+import { spin } from "@animations/spin";
 
 // Generate dynamic borderWidth getting 12.5% from size
 const getPercentage = (size: number) => (size * 12.5) / 100;

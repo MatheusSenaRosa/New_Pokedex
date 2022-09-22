@@ -4,7 +4,7 @@ export interface IPokemonContextType {
   types: IType[];
   count: number;
   pokemons: IPokemon[];
-  typeFilter: number;
+  typeFilter: number | null;
   search: string;
   isLoading: boolean;
   isLoadingMore: boolean;
