@@ -1,7 +1,6 @@
 import { AiOutlineSearch } from "react-icons/ai";
 
-import { usePokemon } from "@context";
-
+import { usePokemon } from "../../context";
 import * as S from "./styles";
 
 export function Search() {

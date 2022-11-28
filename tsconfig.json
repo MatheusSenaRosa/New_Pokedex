@@ -18,7 +18,6 @@
     "jsx": "react-jsx",
     "paths": {
       "@animations/*": ["./styles/animations/*"],
-      "@context": ["./context/index"],
       "@components": ["./components/index"],
       "@pages": ["./pages/index"],
       "@services": ["./shared/services/index"],

@@ -12,7 +12,7 @@ import { IconAll, iconTypes } from "@assets";
 import { IPokemon, IType, IResult, IError } from "@interfaces";
 import { GetPokemonByNameOrIdReturn, usePokeapi } from "@services";
 
-import { IPokemonContextType, Props } from "./interfaces";
+import { IPokemonContextType, Props } from "./typings";
 
 const PokemonContext = createContext<IPokemonContextType | null>(null);
 
@@ -43,16 +43,19 @@ export function PokemonContextProvider({ children }: Props) {
 
   const getPokemonsLoop = async (offset?: number) => {
     const pokemonsResponse = await getPokemons(offset);
-    const formattedPokemons: IPokemon[] = [];
 
-    for (const index in pokemonsResponse.results) {
-      const id = pokemonsResponse.results[index].url.split("/")[6];
-      const pokemon = await getPokemonByNameOrId(id);
-      formattedPokemons.push(formatPokemon(pokemon));
-    }
+    const pokemonsList: IPokemon[] = await Promise.all(
+      pokemonsResponse.results.map(async (item) => {
+        const id = item.url.split("/")[6];
+        const pokemon = await getPokemonByNameOrId(id);
+        const formattedPokemon = formatPokemon(pokemon);
+
+        return formattedPokemon;
+      })
+    );
 
     return {
-      pokemons: formattedPokemons,
+      pokemons: pokemonsList,
       count: pokemonsResponse.count,
     };
   };
@@ -89,8 +92,10 @@ export function PokemonContextProvider({ children }: Props) {
 
   const fetchData = useCallback(async () => {
     try {
-      const typesResponse = await getTypes();
-      const pokemonsResponse = await getPokemonsLoop();
+      const [typesResponse, pokemonsResponse] = await Promise.all([
+        getTypes(),
+        getPokemonsLoop(),
+      ]);
 
       const formattedTypes = matchIconsWithTypes(typesResponse.results);
 
@@ -146,6 +151,7 @@ export function PokemonContextProvider({ children }: Props) {
 
   const onSubmitSearchHandler = async (e: FormEvent) => {
     e.preventDefault();
+
     setIsLoading(true);
     try {
       const pokemon = await getPokemonByNameOrId(search.toLowerCase());
@@ -190,12 +196,4 @@ export function PokemonContextProvider({ children }: Props) {
   );
 }
 
-export const usePokemon = () => {
-  const context = useContext(PokemonContext);
-
-  if (!context) {
-    throw new Error("usePokemon must be used within a PokemonProvider");
-  }
-
-  return context;
-};
+export const usePokemon = () => useContext(PokemonContext);

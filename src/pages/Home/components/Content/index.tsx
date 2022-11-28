@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import { Pokeball } from "@assets";
 import { Loader, Select } from "@components";
-import { usePokemon } from "@context";
 import { capitalizeFirstLetter } from "@utils";
 
+import { usePokemon } from "../../context";
 import { Modal } from "../Modal";
 import * as S from "./styles";
 
