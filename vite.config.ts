@@ -9,6 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@animations": path.resolve(__dirname, "src/styles/animations"),
+      "@templates": path.resolve(__dirname, "src/templates"),
       "@components": path.resolve(__dirname, "src/components"),
       "@pages": path.resolve(__dirname, "src/pages"),
       "@interfaces": path.resolve(__dirname, "src/shared/interfaces"),
@@ -18,3 +19,4 @@ export default defineConfig({
     },
   },
 });
+

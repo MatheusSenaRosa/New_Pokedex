@@ -1,15 +1,16 @@
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
-import { Home } from "@pages";
+import { HomePage } from "@pages";
 
 function App() {
   return (
     <>
-      <Home />
+      <HomePage />
       <ToastContainer theme="colored" />
     </>
   );
 }
 
 export default App;
+

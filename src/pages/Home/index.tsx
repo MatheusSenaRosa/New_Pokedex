@@ -1,21 +1,6 @@
-import { Content, Footer, Header, Search } from "./components";
-import { PokemonContextProvider } from "./context";
+import { Home } from "@templates";
 
-function HomeComponent() {
-  return (
-    <>
-      <Header />
-      <Search />
-      <Content />
-      <Footer />
-    </>
-  );
+export function HomePage() {
+  return <Home />;
 }
 
-export function Home() {
-  return (
-    <PokemonContextProvider>
-      <HomeComponent />
-    </PokemonContextProvider>
-  );
-}

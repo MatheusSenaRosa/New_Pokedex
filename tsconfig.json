@@ -18,6 +18,7 @@
     "jsx": "react-jsx",
     "paths": {
       "@animations/*": ["./styles/animations/*"],
+      "@templates": ["./templates/index"],
       "@components": ["./components/index"],
       "@pages": ["./pages/index"],
       "@services": ["./shared/services/index"],
@@ -29,3 +30,4 @@
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
+
