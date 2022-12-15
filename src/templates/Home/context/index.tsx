@@ -14,7 +14,9 @@ import { GetPokemonByNameOrIdReturn, usePokeapi } from "@services";
 
 import { IPokemonContextType, Props } from "./typings";
 
-const PokemonContext = createContext<IPokemonContextType | null>(null);
+const PokemonContext = createContext<IPokemonContextType>(
+  {} as IPokemonContextType
+);
 
 export function PokemonContextProvider({ children }: Props) {
   const [typeFilter, setTypeFilter] = useState<number | null>(0);
@@ -44,18 +46,19 @@ export function PokemonContextProvider({ children }: Props) {
   const getPokemonsLoop = async (offset?: number) => {
     const pokemonsResponse = await getPokemons(offset);
 
-    const pokemonsList: IPokemon[] = await Promise.all(
+    const pokemonsList = await Promise.all(
       pokemonsResponse.results.map(async (item) => {
         const id = item.url.split("/")[6];
-        const pokemon = await getPokemonByNameOrId(id);
-        const formattedPokemon = formatPokemon(pokemon);
-
-        return formattedPokemon;
+        return getPokemonByNameOrId(id);
       })
     );
 
+    const pokemonsFormattedList = pokemonsList.map((item) =>
+      formatPokemon(item)
+    );
+
     return {
-      pokemons: pokemonsList,
+      pokemons: pokemonsFormattedList,
       count: pokemonsResponse.count,
     };
   };
@@ -130,15 +133,13 @@ export function PokemonContextProvider({ children }: Props) {
         (item) => item.pokemon.url.split("/")[6]
       );
 
-      const formattedPokemons: IPokemon[] = [];
+      const pokemonsList = await Promise.all(
+        pokemonsId.map((id) => getPokemonByNameOrId(+id))
+      );
 
-      for (const id in pokemonsId) {
-        const pokemon = await getPokemonByNameOrId(pokemonsId[+id]);
-        const formatted = formatPokemon(pokemon);
-        if (formatted.image) {
-          formattedPokemons.push(formatted);
-        }
-      }
+      const formattedPokemons: IPokemon[] = pokemonsList
+        .map((item) => formatPokemon(item))
+        .filter((item) => item.image);
 
       setCount(formattedPokemons.length);
       setPokemons(formattedPokemons);
@@ -197,3 +198,4 @@ export function PokemonContextProvider({ children }: Props) {
 }
 
 export const usePokemon = () => useContext(PokemonContext);
+

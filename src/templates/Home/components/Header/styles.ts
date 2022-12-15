@@ -23,8 +23,8 @@ export const Container = styled.header`
 export const Image = styled.img<{ isShowing: boolean }>`
   ${({ isShowing }) => css`
     position: absolute;
-    top: ${rem(-133)};
-    height: 100%;
+    min-height: ${rem(900)};
+    top: ${rem(-100)};
     width: 100%;
     object-fit: cover;
     z-index: ${isShowing ? -1 : -2};
@@ -165,3 +165,4 @@ export const Pokeball = styled.img<{ type: "red" | "blue" }>`
     `}
   `}
 `;
+
